@@ -10,14 +10,26 @@
 ## Inception Phase
 - [x] Workspace Detection（完了）
 - [ ] Reverse Engineering（スキップ - 実質Greenfield）
-- [x] Requirements Analysis（完了 - 2026-05-04）
-- [ ] User Stories
-- [ ] Workflow Planning
-- [ ] Application Design
-- [ ] Units Generation
+- [x] Requirements Analysis（完了・承認済み - 2026-05-04）
+- [x] User Stories（完了・承認済み - 2026-05-04）
+- [x] Workflow Planning（完了・承認済み - 2026-05-04）
+- [x] Application Design（完了・承認済み - 2026-05-04）
+- [x] Units Generation（完了・承認待ち - 2026-05-04）
 
 ## Construction Phase
-- [ ] Unit 実装（未定）
+- [ ] Unit-01: 基盤セットアップ
+  - [ ] NFR Requirements
+  - [ ] NFR Design
+  - [ ] Infrastructure Design
+  - [ ] Code Generation
+- [ ] Unit-02: 認証機能
+  - [ ] Functional Design
+  - [ ] NFR Requirements
+  - [ ] NFR Design
+  - [ ] Code Generation
+- [ ] Unit-03: ブログ機能
+  - [ ] Functional Design
+  - [ ] Code Generation
 - [ ] Build and Test
 
 ## Operations Phase
@@ -28,6 +40,6 @@
 - Performance: 未設定
 
 ## 現在のステージ
-**Requirements Analysis** 完了 → 承認待ち（承認後 User Stories へ進行）
+**Units Generation** 完了（承認待ち）
 
 ---
