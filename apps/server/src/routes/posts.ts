@@ -52,7 +52,8 @@ postsRouter.get('/posts/new', requireAuth, (c) => {
 
 /** POST /posts - 記事作成（認証必須） */
 postsRouter.post('/posts', requireAuth, async (c) => {
-  const currentUser = c.var.currentUser!
+  const currentUser = c.var.currentUser
+  if (!currentUser) return c.redirect('/login', 302)
 
   const body = await c.req.parseBody()
 
@@ -102,7 +103,8 @@ postsRouter.get('/posts/:id', (c) => {
 
 /** GET /posts/:id/edit - 記事編集フォーム（認証必須・所有者のみ） */
 postsRouter.get('/posts/:id/edit', requireAuth, (c) => {
-  const currentUser = c.var.currentUser!
+  const currentUser = c.var.currentUser
+  if (!currentUser) return c.redirect('/login', 302)
   const post = postsStore.findById(c.req.param('id'))
 
   if (!post) {
@@ -120,7 +122,8 @@ postsRouter.get('/posts/:id/edit', requireAuth, (c) => {
 
 /** POST /posts/:id - 記事更新（Inertia _method=PUT をシミュレート） */
 postsRouter.post('/posts/:id', requireAuth, async (c) => {
-  const currentUser = c.var.currentUser!
+  const currentUser = c.var.currentUser
+  if (!currentUser) return c.redirect('/login', 302)
   const post = postsStore.findById(c.req.param('id'))
 
   if (!post) {

@@ -15,7 +15,8 @@ const commentsRouter = new Hono<Env>()
 
 /** POST /posts/:id/comments - コメント投稿（認証必須） */
 commentsRouter.post('/posts/:id/comments', requireAuth, async (c) => {
-  const currentUser = c.var.currentUser!
+  const currentUser = c.var.currentUser
+  if (!currentUser) return c.redirect('/login', 302)
   const postId = c.req.param('id')
 
   // 記事の存在確認
@@ -46,10 +47,7 @@ commentsRouter.post('/posts/:id/comments', requireAuth, async (c) => {
     return c.render('PostShow', { post, comments, errors })
   }
 
-  const comment = commentsStore.create(
-    { body: parseResult.data.body, postId },
-    currentUser
-  )
+  const comment = commentsStore.create({ body: parseResult.data.body, postId }, currentUser)
 
   logger.info('コメント投稿完了', { commentId: comment.id, postId, userId: currentUser.id })
 

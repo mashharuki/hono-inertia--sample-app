@@ -33,10 +33,7 @@ export default function Home({ posts, pagination }: HomeProps) {
               </p>
             </div>
             {auth.user && (
-              <Link
-                href="/posts/new"
-                className="btn-primary no-underline"
-              >
+              <Link href="/posts/new" className="btn-primary no-underline">
                 新しい記事を書く
               </Link>
             )}

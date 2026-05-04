@@ -44,9 +44,7 @@ export default function PostEdit({ post }: PostEditProps) {
           {/* ページヘッダー */}
           <div className="mb-6">
             <h1 className="text-2xl font-bold text-slate-900">記事を編集</h1>
-            <p className="mt-1 text-sm text-slate-500 truncate">
-              {post.title}
-            </p>
+            <p className="mt-1 text-sm text-slate-500 truncate">{post.title}</p>
           </div>
 
           {/* 編集フォーム */}
@@ -69,7 +67,6 @@ export default function PostEdit({ post }: PostEditProps) {
                     ${form.errors.title ? 'border-red-300 bg-red-50' : 'border-slate-300 bg-white'}`}
                   aria-describedby={form.errors.title ? 'post-title-error' : undefined}
                   disabled={form.processing}
-                  autoFocus
                 />
               </div>
               {form.errors.title && (

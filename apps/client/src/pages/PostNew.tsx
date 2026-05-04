@@ -62,7 +62,6 @@ export default function PostNew(_props: PostNewProps) {
                     ${form.errors.title ? 'border-red-300 bg-red-50' : 'border-slate-300 bg-white'}`}
                   aria-describedby={form.errors.title ? 'post-title-error' : undefined}
                   disabled={form.processing}
-                  autoFocus
                 />
               </div>
               {form.errors.title && (

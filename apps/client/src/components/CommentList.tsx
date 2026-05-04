@@ -50,10 +50,7 @@ export default function CommentList({ comments }: CommentListProps) {
               <span className="text-sm font-medium text-slate-900">
                 {comment.author.displayName}
               </span>
-              <time
-                dateTime={comment.createdAt}
-                className="ml-2 text-xs text-slate-500"
-              >
+              <time dateTime={comment.createdAt} className="ml-2 text-xs text-slate-500">
                 {formatDate(comment.createdAt)}
               </time>
             </div>

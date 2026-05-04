@@ -111,10 +111,10 @@ export async function verifyPassword(
   // 長さが異なる場合は false（ただし計算は完了させる）
   if (derived.length !== expectedHash.length) {
     // タイミング攻撃対策: 長さが違っても同じ時間をかける
-    let result = 0
+    let _result = 0
     const minLen = Math.min(derived.length, expectedHash.length)
     for (let i = 0; i < minLen; i++) {
-      result |= (derived[i] ?? 0) ^ (expectedHash[i] ?? 0)
+      _result |= (derived[i] ?? 0) ^ (expectedHash[i] ?? 0)
     }
     return false
   }

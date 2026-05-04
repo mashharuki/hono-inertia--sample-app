@@ -82,9 +82,7 @@ export default function PostCard({ post }: PostCardProps) {
       {/* 本文プレビュー */}
       <p className="text-sm text-slate-600 leading-relaxed">
         {preview}
-        {hasMore && (
-          <span className="text-slate-400">...</span>
-        )}
+        {hasMore && <span className="text-slate-400">...</span>}
       </p>
 
       {/* 続きを読むリンク */}

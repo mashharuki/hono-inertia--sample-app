@@ -64,7 +64,10 @@ export default function PostShow({ post, comments }: PostShowProps) {
       <div className="container-content py-8">
         <div className="mx-auto max-w-3xl">
           {/* パンくずリスト */}
-          <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500" aria-label="パンくずリスト">
+          <nav
+            className="mb-6 flex items-center gap-2 text-sm text-slate-500"
+            aria-label="パンくずリスト"
+          >
             <Link href="/" className="hover:text-slate-700 no-underline transition-colors">
               ホーム
             </Link>
@@ -158,7 +161,10 @@ export default function PostShow({ post, comments }: PostShowProps) {
                 <div className="text-center">
                   <p className="text-sm text-slate-600">
                     コメントするには
-                    <Link href="/login" className="font-medium text-primary-600 hover:text-primary-700 no-underline">
+                    <Link
+                      href="/login"
+                      className="font-medium text-primary-600 hover:text-primary-700 no-underline"
+                    >
                       ログイン
                     </Link>
                     が必要です

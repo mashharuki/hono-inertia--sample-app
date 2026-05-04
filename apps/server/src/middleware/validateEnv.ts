@@ -22,9 +22,7 @@ export function validateEnv(env: Env['Bindings']): void {
 
   if (env.SESSION_SECRET.length < 32) {
     throw new Error(
-      `SESSION_SECRET が短すぎます（現在: ${env.SESSION_SECRET.length}文字）。` +
-        '32文字以上のランダムな文字列を設定してください。\n' +
-        '生成例: openssl rand -base64 32'
+      `SESSION_SECRET が短すぎます（現在: ${env.SESSION_SECRET.length}文字）。32文字以上のランダムな文字列を設定してください。\n生成例: openssl rand -base64 32`
     )
   }
 }
