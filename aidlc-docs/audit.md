@@ -133,3 +133,63 @@
 
 ---
 
+## Construction Phase - 開始
+**Timestamp**: 2026-05-04T14:00:00Z
+**User Input**: "Construction Phaseを始めてください。各ユニットにはタスクが複数あります。ステップバイステップで進めてください！！"
+**AI Response**: Construction Phase を開始。Unit-01（基盤セットアップ）から順番にステップバイステップで処理を開始する。Unit-01 の Construction ステージ計画: NFR Requirements → NFR Design → Infrastructure Design → Code Generation（Functional Design はスキップ）。
+**Context**: Construction Phase 開始。aidlc-state.md に従い、Unit-01 の NFR Requirements から着手する。
+
+---
+
+## Construction Unit-01 - NFR Requirements 完了
+**Timestamp**: 2026-05-04T14:10:00Z
+**User Input**: （自動実行）
+**AI Response**: NFR Requirements を生成完了。Cloudflare Workers 制約（バンドルサイズ・Node.js API禁止・ステートレス設計）・TypeScript strict・Biome・セキュリティ基本要件を定義。成果物: aidlc-docs/construction/unit-01/nfr-requirements/nfr-requirements.md
+**Context**: Unit-01 NFR Requirements ステージ完了。
+
+---
+
+## Construction Unit-01 - NFR Design 完了
+**Timestamp**: 2026-05-04T14:20:00Z
+**User Input**: （自動実行）
+**AI Response**: NFR Design を生成完了。Web Crypto API 使用パターン・ステートレス設計パターン・Vite設定・バンドルサイズ管理・wrangler.toml設計・Biome設定・セキュリティヘッダー設計を定義。成果物: aidlc-docs/construction/unit-01/nfr-design/nfr-design.md
+**Context**: Unit-01 NFR Design ステージ完了。
+
+---
+
+## Construction Unit-01 - Infrastructure Design 完了
+**Timestamp**: 2026-05-04T14:30:00Z
+**User Input**: （自動実行）
+**AI Response**: Infrastructure Design を生成完了。モノレポディレクトリ構造・全 package.json 仕様・wrangler.toml・vite.config.ts（server/client）・tsconfig.json（プロジェクト参照）・.gitignore を設計。成果物: aidlc-docs/construction/unit-01/infrastructure-design/infrastructure-design.md
+**Context**: Unit-01 Infrastructure Design ステージ完了。Code Generation Part 1（計画）へ移行。
+
+---
+
+## Construction Unit-01 - Code Generation Plan（Part 1）完了
+**Timestamp**: 2026-05-04T14:40:00Z
+**User Input**: （自動実行）
+**AI Response**: Code Generation Plan を生成完了。4ステップ・23ファイルの実装計画をチェックボックス形式で定義。ユーザー承認待ち。成果物: aidlc-docs/construction/unit-01/code/code-generation-plan.md
+**Context**: Unit-01 Code Generation Part 1 完了。ユーザー承認後に Part 2（実際のコード生成）を開始する。
+
+---
+
+## Construction Unit-01 - Code Generation Part 2 開始
+**Timestamp**: 2026-05-04T15:00:00Z
+**User Input**: "ユーザーが [B] を選択しました。承認済みの計画に従って、Unit-01のコード生成（Part 2）を実行してください。Step 1: モノレポルート設定ファイル（5ファイル）、Step 2: packages/shared（型定義・Zodスキーマ、7ファイル）、Step 3: apps/server骨格（Honoエントリ・設定一式、5ファイル）、Step 4: apps/client骨格（React + Inertia・Tailwind、9ファイル）"
+**AI Response**: Unit-01 Code Generation Part 2 を開始。hono-inertia スキルを参照しながらStep 1から順に実装を開始する。
+**Context**: Unit-01 Code Generation Part 2 開始。
+
+---
+
+## Construction Unit-01 - Code Generation Part 2 完了
+**Timestamp**: 2026-05-04T15:30:00Z
+**User Input**: （自動実行）
+**AI Response**: 全4ステップ・24ファイルの実装を完了。
+  - Step 1（完了）: pnpm-workspace.yaml / package.json（root）/ biome.json / tsconfig.json（root）/ .gitignore
+  - Step 2（完了）: packages/shared/package.json / tsconfig.json / src/types/index.ts / src/schemas/auth.ts / src/schemas/posts.ts / src/schemas/comments.ts / src/index.ts
+  - Step 3（完了）: apps/server/package.json / tsconfig.json / vite.config.ts / wrangler.toml / src/index.ts
+  - Step 4（完了）: apps/client/package.json / tsconfig.json / vite.config.ts / index.html / tailwind.config.ts / postcss.config.js / src/main.tsx / src/layouts/RootLayout.tsx / src/styles/globals.css（+ pages/Home.tsx 追加）
+**Context**: Unit-01 Code Generation 全ステージ完了。ユーザー承認待ち。
+
+---
+

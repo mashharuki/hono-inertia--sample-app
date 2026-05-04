@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* カラー変数 */
+    --color-bg: 255 255 255;
+    --color-fg: 15 23 42;
+    --color-muted: 100 116 139;
+    --color-border: 226 232 240;
+    --color-card: 248 250 252;
+
+    /* スペーシング */
+    --header-height: 4rem;
+    --footer-height: 3.5rem;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    border-color: rgb(var(--color-border));
+  }
+
+  html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white text-slate-900 antialiased;
+    font-family: 'Inter', 'Noto Sans JP', ui-sans-serif, system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold leading-tight tracking-tight;
+  }
+
+  a {
+    @apply text-primary-600 hover:text-primary-700 transition-colors;
+  }
+
+  /* フォーカスリング（アクセシビリティ） */
+  :focus-visible {
+    @apply outline-none ring-2 ring-primary-500 ring-offset-2;
+  }
+}
+
+@layer components {
+  /* ボタン基本スタイル */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2
+           font-medium text-sm transition-all duration-150
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-primary {
+    @apply btn bg-primary-600 text-white
+           hover:bg-primary-700 active:bg-primary-800
+           shadow-sm hover:shadow-md;
+  }
+
+  .btn-secondary {
+    @apply btn bg-white text-slate-700 border border-slate-300
+           hover:bg-slate-50 active:bg-slate-100
+           shadow-sm;
+  }
+
+  .btn-danger {
+    @apply btn bg-red-600 text-white
+           hover:bg-red-700 active:bg-red-800
+           shadow-sm;
+  }
+
+  /* フォーム要素 */
+  .form-input {
+    @apply block w-full rounded-lg border border-slate-300 bg-white
+           px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400
+           focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20
+           transition-colors;
+  }
+
+  .form-label {
+    @apply block text-sm font-medium text-slate-700 mb-1;
+  }
+
+  .form-error {
+    @apply mt-1 text-xs text-red-600;
+  }
+
+  /* カード */
+  .card {
+    @apply rounded-xl border border-slate-200 bg-white shadow-sm;
+  }
+
+  /* コンテナ */
+  .container-content {
+    @apply mx-auto w-full max-w-content px-4 sm:px-6 lg:px-8;
+  }
+}

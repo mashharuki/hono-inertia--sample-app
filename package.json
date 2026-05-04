@@ -1,0 +1,17 @@
+{
+  "name": "hono-inertia-blog",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --filter @repo/server dev",
+    "build:client": "pnpm --filter @repo/client build",
+    "build:server": "pnpm --filter @repo/server build",
+    "build": "pnpm build:client && pnpm build:server",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "typecheck": "tsc --build --noEmit"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "typescript": "^5.7.0"
+  }
+}

@@ -17,11 +17,11 @@
 - [x] Units Generation（完了・承認待ち - 2026-05-04）
 
 ## Construction Phase
-- [ ] Unit-01: 基盤セットアップ
-  - [ ] NFR Requirements
-  - [ ] NFR Design
-  - [ ] Infrastructure Design
-  - [ ] Code Generation
+- [x] Unit-01: 基盤セットアップ
+  - [x] NFR Requirements（完了 - 2026-05-04）
+  - [x] NFR Design（完了 - 2026-05-04）
+  - [x] Infrastructure Design（完了 - 2026-05-04）
+  - [x] Code Generation（完了 - 2026-05-04 / 24ファイル）
 - [ ] Unit-02: 認証機能
   - [ ] Functional Design
   - [ ] NFR Requirements
@@ -40,6 +40,6 @@
 - Performance: 未設定
 
 ## 現在のステージ
-**Units Generation** 完了（承認待ち）
+**Construction Phase** - Unit-01 Code Generation 完了・ユーザー承認待ち（次: Unit-02 Functional Design）
 
 ---

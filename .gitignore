@@ -1,0 +1,24 @@
+# Cloudflare Workers
+.dev.vars
+.wrangler/
+
+# pnpm
+node_modules/
+.pnpm-store/
+
+# Build outputs
+dist/
+apps/server/public/
+
+# TypeScript
+*.tsbuildinfo
+
+# Editor
+.DS_Store
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
