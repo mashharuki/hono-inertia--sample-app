@@ -193,3 +193,95 @@
 
 ---
 
+## Construction Unit-01 - ユーザー承認（[B] 選択）
+**Timestamp**: 2026-05-04T16:00:00Z
+**User Input**: "AI-DLC Construction Phase の続きです。ユーザーが [B] を選択しました。Unit-01が完了し、Unit-02（認証機能）のFunctional Designを開始してください。"
+**AI Response**: Unit-01 の承認を受理。Unit-02（認証機能）の Functional Design を開始する。
+**Context**: Unit-01 全ステージ完了・承認済み。Construction Phase Unit-02 Functional Design へ移行。
+
+---
+
+## Construction Unit-02 - Functional Design 開始
+**Timestamp**: 2026-05-04T16:01:00Z
+**User Input**: （Unit-01 承認に続き自動実行）
+**AI Response**: Unit-02（認証機能）の Functional Design を開始。ユーザーデータモデル・PBKDF2認証ロジック・署名Cookie仕様・認証フロー・ビジネスルールの詳細設計書を作成中。
+**Context**: Unit-02 Functional Design 開始。対象: usersStore / crypto.ts / session.ts / auth middleware / Register・Login ページ。
+
+---
+
+## Construction Unit-02 - Functional Design 完了
+**Timestamp**: 2026-05-04T16:15:00Z
+**User Input**: （自動実行）
+**AI Response**: Unit-02 Functional Design 設計書を生成完了。aidlc-docs/construction/unit-02/functional-design/functional-design.md を作成。ユーザー承認待ち。
+  - 設計内容: User データモデル（モックデータ2件）・セッション Cookie 仕様・3フロー（登録/ログイン/ログアウト）・PBKDF2実装方針・HMAC-SHA256署名Cookie実装方針・Inertia バリデーションエラーパターン・Register/Login コンポーネント仕様・環境変数設計
+**Context**: Unit-02 Functional Design 完了。aidlc-state.md の [x] Functional Design を更新済み。次: NFR Requirements。
+
+---
+
+## Construction Unit-02 - NFR Requirements 開始（ユーザー承認受領）
+**Timestamp**: 2026-05-04T17:00:00Z
+**User Input**: "AI-DLC Construction Phase の続きです。ユーザーが [B] を選択しました。Unit-02（認証機能）のFunctional Designが承認され、次はNFR Requirementsを実行してください。"
+**AI Response**: Unit-02 NFR Requirements を開始。Functional Design を分析し、NFR 明確化質問（Q1〜Q7）を生成。計画ファイルを aidlc-docs/construction/plans/unit-02-nfr-requirements-plan.md に保存。ユーザーの回答を待機中。
+**Context**: Unit-02 NFR Requirements - Step 1〜3 完了。暗号化要件・セキュリティ要件・Cloudflare Workers制約を分析。7つの質問を生成してユーザー入力待ち。
+
+---
+
+## Construction Unit-02 - NFR Requirements 質問への回答受領
+**Timestamp**: 2026-05-04T18:00:00Z
+**User Input**: "AI-DLC Construction Phase の続きです。Unit-02（認証機能）NFR Requirementsの質問に対してユーザーが回答しました。この回答をもとにNFR要件書を生成してください。ユーザーの回答: Q1（PBKDF2イテレーション数）: A → 200ms以内、10,000イテレーション、レスポンス優先 / Q2（CSRF対策）: A → SameSite=Laxのみ（学習用、最小限） / Q3（セッション検証キャッシュ）: A → 最適化不要（毎回検証） / Q4（ログイン失敗レート制限）: A → 不要（学習用） / Q5（セッション有効期限更新）: A → 固定7日間 / Q6（エラーロギング）: B → 構造化ログ（JSON形式、Cloudflare Workers logpush対応） / Q7（環境変数バリデーション）: B → 起動時にエラーthrow（本番で未設定を防ぐ）"
+**AI Response**: 回答を受理し、Unit-02 NFR要件書（nfr-requirements.md）および技術スタック決定書（tech-stack-decisions.md）を生成。aidlc-state.md を更新。
+**Context**: Unit-02 NFR Requirements - Step 5〜6 完了。Q1〜Q7の全回答を元に非機能要件を確定。イテレーション数=10,000（200ms以内・レスポンス優先）、CSRF=SameSite=Laxのみ、キャッシュ=なし、レート制限=なし、セッション=固定7日、ログ=JSON構造化、環境変数=起動時バリデーション。
+
+---
+
+## Construction Unit-02 - NFR Requirements ユーザー承認（[B] 選択）
+**Timestamp**: 2026-05-04T18:30:00Z
+**User Input**: "AI-DLC Construction Phase の続きです。ユーザーが [B] を選択しました。Unit-02（認証機能）のNFR Requirementsが承認され、次はNFR Designを実行してください。"
+**AI Response**: Unit-02 NFR Requirements の承認を受理。NFR Design ステージを開始する。
+**Context**: Unit-02 NFR Requirements 承認完了。[B]（次のステージへ進む）を選択。次: Unit-02 NFR Design。
+
+---
+
+## Construction Unit-02 - NFR Design 完了
+**Timestamp**: 2026-05-04T19:00:00Z
+**User Input**: （自動実行）
+**AI Response**: Unit-02 NFR Design を完了。以下の 2 ファイルを aidlc-docs/construction/unit-02/nfr-design/ に作成。ユーザー承認待ち。
+  - nfr-design-patterns.md: 5 カテゴリの設計パターン定義（暗号化・タイミングセーフ・HMAC Cookie・環境変数バリデーション・構造化ロガー・非同期処理・Hono型拡張）
+  - logical-components.md: 8 コンポーネント定義（crypto.ts / session.ts / logger.ts / validateEnv.ts / auth middleware / auth routes / usersStore.ts / env.ts）、依存グラフ（DAG・循環依存なし）、NFR 適合マトリクス（16 NFR ID すべてカバー）
+**Context**: Unit-02 NFR Design ステージ完了。Cloudflare Workers（Web Crypto API・ステートレス・Edge環境）に特化した設計パターンを適用。aidlc-state.md を更新予定。
+
+---
+
+## Construction Unit-02 - NFR Design ユーザー承認（[B] 選択）
+**Timestamp**: 2026-05-04T19:30:00Z
+**User Input**: "AI-DLC Construction Phase の続きです。ユーザーが [B] を選択しました。Unit-02（認証機能）のNFR Designが承認され、次はCode Generation（Part 1 - 計画）を実行してください。"
+**AI Response**: Unit-02 NFR Design の承認を受理。Code Generation Part 1（計画フェーズ）を開始する。
+**Context**: Unit-02 NFR Design 承認完了。[B]（次のステージへ進む）を選択。次: Unit-02 Code Generation Part 1。
+
+---
+
+## Construction Unit-02 - Code Generation Part 1（計画）完了
+**Timestamp**: 2026-05-04T19:45:00Z
+**User Input**: （自動実行）
+**AI Response**: Unit-02 Code Generation Plan を生成完了。5ステップ・12ファイルの実装計画をチェックボックス形式で定義。ユーザー承認待ち。
+  - Step 1（4ファイル）: サーバー型定義・ユーティリティ層（env.ts / logger.ts / crypto.ts / session.ts）
+  - Step 2（2ファイル）: サーバー ミドルウェア層（validateEnv.ts / auth.ts）
+  - Step 3（1ファイル）: サーバー データストア層（usersStore.ts）
+  - Step 4（2ファイル）: サーバー ルートハンドラー層（routes/auth.ts / index.ts 更新）
+  - Step 5（3ファイル）: クライアント 認証ページ（Register.tsx / Login.tsx / Dashboard.tsx）
+  成果物: aidlc-docs/construction/unit-02/code/code-generation-plan.md
+**Context**: Unit-02 Code Generation Part 1 完了。NFR 準拠事項（Web Crypto API のみ・タイミングセーフ・ステートレス設計）を実装方針に明記。ユーザー承認後に Part 2（実際のコード生成）を開始する。
+
+---
+
+## Construction Unit-02 - Code Generation Part 2 完了（セッション中断後の再開）
+**Timestamp**: 2026-05-04T20:00:00Z
+**User Input**: "処理が途中で止まってしまったので続きから再開してください"
+**AI Response**: 全12ファイルが正常に作成済みであることを確認。code-generation-plan.md の全チェックボックスを [x] に更新。aidlc-state.md を Unit-02 完了として更新。
+  - Step 1〜5 全12ファイル生成確認済み
+  - apps/server/src/: types/env.ts / lib/crypto.ts / lib/logger.ts / lib/session.ts / middleware/validateEnv.ts / middleware/auth.ts / stores/usersStore.ts / routes/auth.ts / index.ts（更新）
+  - apps/client/src/pages/: Register.tsx / Login.tsx / Dashboard.tsx
+**Context**: Unit-02 Code Generation Part 2 完了。セッション制限による中断後に再開し、進捗記録を正常化。次: Unit-03（ブログ機能）Functional Design。
+
+---
+

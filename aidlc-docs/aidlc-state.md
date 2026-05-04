@@ -22,11 +22,11 @@
   - [x] NFR Design（完了 - 2026-05-04）
   - [x] Infrastructure Design（完了 - 2026-05-04）
   - [x] Code Generation（完了 - 2026-05-04 / 24ファイル）
-- [ ] Unit-02: 認証機能
-  - [ ] Functional Design
-  - [ ] NFR Requirements
-  - [ ] NFR Design
-  - [ ] Code Generation
+- [x] Unit-02: 認証機能
+  - [x] Functional Design（完了 - 2026-05-04）
+  - [x] NFR Requirements（完了 - 2026-05-04）
+  - [x] NFR Design（完了 - 2026-05-04）
+  - [x] Code Generation（完了 - 2026-05-04 / 12ファイル）
 - [ ] Unit-03: ブログ機能
   - [ ] Functional Design
   - [ ] Code Generation
@@ -40,6 +40,6 @@
 - Performance: 未設定
 
 ## 現在のステージ
-**Construction Phase** - Unit-01 Code Generation 完了・ユーザー承認待ち（次: Unit-02 Functional Design）
+**Construction Phase** - Unit-02 完了・Unit-03（ブログ機能）へ進む準備完了
 
 ---

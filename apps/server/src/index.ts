@@ -1,25 +1,20 @@
 import { inertia } from '@hono/inertia'
 import type { SharedProps } from '@repo/shared'
 import { Hono } from 'hono'
-import { logger } from 'hono/logger'
+import { logger as honoLogger } from 'hono/logger'
 import { secureHeaders } from 'hono/secure-headers'
-
-// Cloudflare Workers 環境変数の型
-type Env = {
-  Bindings: {
-    ASSETS: Fetcher
-    ENVIRONMENT: string
-  }
-  Variables: {
-    user: SharedProps['auth']['user']
-  }
-}
+import { authMiddleware } from './middleware/auth.js'
+import { authRouter } from './routes/auth.js'
+import type { Env } from './types/env.js'
 
 const app = new Hono<Env>()
 
 // ミドルウェア
-app.use('*', logger())
+app.use('*', honoLogger())
 app.use('*', secureHeaders())
+
+// 認証ミドルウェア（全ルートに適用: currentUser を設定する）
+app.use('*', authMiddleware)
 
 // Inertia アダプタ設定
 // 共有 props（全ページで利用可能）をここで定義する
@@ -36,7 +31,7 @@ app.use(
     sharedProps: async (c): Promise<SharedProps> => {
       return {
         auth: {
-          user: c.var.user ?? null,
+          user: c.var.currentUser ?? null,
         },
         flash: {
           success: undefined,
@@ -47,6 +42,9 @@ app.use(
   })
 )
 
+// 認証ルート: /register, /login, /logout
+app.route('/', authRouter)
+
 // ルート: ホームページ
 app.get('/', (c) => {
   return c.render('Home', {
@@ -54,11 +52,15 @@ app.get('/', (c) => {
   })
 })
 
+// ルート: ダッシュボード
+app.get('/dashboard', (c) => {
+  return c.render('Dashboard', {})
+})
+
 // 静的アセット配信（本番環境: Cloudflare Assets）
 // 開発時は @hono/vite-dev-server が担当するため、
 // この handler は本番デプロイ時にのみ実質的に動作する
 
-// TODO: Unit-02 で認証ルートを追加
 // TODO: Unit-03 でブログ記事・コメントルートを追加
 
 export default app
