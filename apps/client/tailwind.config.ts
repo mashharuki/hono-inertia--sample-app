@@ -32,7 +32,7 @@ const config: Config = {
         mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'monospace'],
       },
       maxWidth: {
-        'content': '72rem',
+        content: '72rem',
       },
     },
   },

@@ -42,10 +42,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <div className="ml-4 flex items-center gap-2">
               {auth.user ? (
                 <>
-                  <Link
-                    href="/posts/new"
-                    className="btn-primary text-xs px-3 py-1.5 no-underline"
-                  >
+                  <Link href="/posts/new" className="btn-primary text-xs px-3 py-1.5 no-underline">
                     記事を書く
                   </Link>
                   <Link
@@ -85,9 +82,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           }`}
           role="alert"
         >
-          <div className="container-content">
-            {flash.success ?? flash.error}
-          </div>
+          <div className="container-content">{flash.success ?? flash.error}</div>
         </div>
       )}
 

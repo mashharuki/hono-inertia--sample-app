@@ -11,12 +11,7 @@
       "Bash(npm run test:*)",
       "Read(~/.zshrc)"
     ],
-    "deny": [
-      "Bash(curl:*)",
-      "Read(./.env)",
-      "Read(./.env.*)",
-      "Read(./secrets/**)"
-    ]
+    "deny": ["Bash(curl:*)", "Read(./.env)", "Read(./.env.*)", "Read(./secrets/**)"]
   },
   "enabledPlugins": {
     "example-skills@anthropic-agent-skills": true

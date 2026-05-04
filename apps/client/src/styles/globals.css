@@ -31,11 +31,16 @@
 
   body {
     @apply bg-white text-slate-900 antialiased;
-    font-family: 'Inter', 'Noto Sans JP', ui-sans-serif, system-ui, -apple-system, sans-serif;
+    font-family: "Inter", "Noto Sans JP", ui-sans-serif, system-ui, -apple-system, sans-serif;
     line-height: 1.6;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-semibold leading-tight tracking-tight;
   }
 

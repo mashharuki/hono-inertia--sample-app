@@ -1,6 +1,6 @@
 /**
  * Self-Improvement Hook for OpenClaw
- * 
+ *
  * Injects a reminder to evaluate learnings during agent bootstrap.
  * Fires on agent:bootstrap event before workspace files are injected.
  */
@@ -23,22 +23,22 @@ After completing tasks, evaluate if any learnings should be captured:
 - Tool gotchas → \`TOOLS.md\`
 
 Keep entries simple: date, title, what happened, what to do differently.
-`.trim();
+`.trim()
 
 const handler = async (event) => {
   // Safety checks for event structure
   if (!event || typeof event !== 'object') {
-    return;
+    return
   }
 
   // Only handle agent:bootstrap events
   if (event.type !== 'agent' || event.action !== 'bootstrap') {
-    return;
+    return
   }
 
   // Safety check for context
   if (!event.context || typeof event.context !== 'object') {
-    return;
+    return
   }
 
   // Inject the reminder as a virtual bootstrap file
@@ -48,9 +48,9 @@ const handler = async (event) => {
       path: 'SELF_IMPROVEMENT_REMINDER.md',
       content: REMINDER_CONTENT,
       virtual: true,
-    });
+    })
   }
-};
+}
 
-module.exports = handler;
-module.exports.default = handler;
+module.exports = handler
+module.exports.default = handler

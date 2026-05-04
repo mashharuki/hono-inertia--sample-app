@@ -16,9 +16,7 @@ export default function Home({ message }: HomeProps) {
           <h1 className="mb-4 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
             Hono × Inertia.js × React
           </h1>
-          <p className="mb-8 text-lg text-slate-600 max-w-2xl mx-auto">
-            {message}
-          </p>
+          <p className="mb-8 text-lg text-slate-600 max-w-2xl mx-auto">{message}</p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link href="/posts" className="btn-primary no-underline px-6 py-3 text-base">
               記事を読む
@@ -33,9 +31,7 @@ export default function Home({ message }: HomeProps) {
       {/* 技術スタック紹介 */}
       <section className="py-16">
         <div className="container-content">
-          <h2 className="mb-10 text-center text-2xl font-bold text-slate-900">
-            技術スタック
-          </h2>
+          <h2 className="mb-10 text-center text-2xl font-bold text-slate-900">技術スタック</h2>
           <div className="grid gap-6 sm:grid-cols-3">
             {[
               {

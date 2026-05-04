@@ -1,11 +1,11 @@
 /**
  * Self-Improvement Hook for OpenClaw
- * 
+ *
  * Injects a reminder to evaluate learnings during agent bootstrap.
  * Fires on agent:bootstrap event before workspace files are injected.
  */
 
-import type { HookHandler } from 'openclaw/hooks';
+import type { HookHandler } from 'openclaw/hooks'
 
 const REMINDER_CONTENT = `## Self-Improvement Reminder
 
@@ -23,29 +23,29 @@ After completing tasks, evaluate if any learnings should be captured:
 - Workflow improvements → \`AGENTS.md\`
 - Tool gotchas → \`TOOLS.md\`
 
-Keep entries simple: date, title, what happened, what to do differently.`;
+Keep entries simple: date, title, what happened, what to do differently.`
 
 const handler: HookHandler = async (event) => {
   // Safety checks for event structure
   if (!event || typeof event !== 'object') {
-    return;
+    return
   }
 
   // Only handle agent:bootstrap events
   if (event.type !== 'agent' || event.action !== 'bootstrap') {
-    return;
+    return
   }
 
   // Safety check for context
   if (!event.context || typeof event.context !== 'object') {
-    return;
+    return
   }
 
   // Skip sub-agent sessions to avoid bootstrap issues
   // Sub-agents have sessionKey patterns like "agent:main:subagent:..."
-  const sessionKey = event.sessionKey || '';
+  const sessionKey = event.sessionKey || ''
   if (sessionKey.includes(':subagent:')) {
-    return;
+    return
   }
 
   // Inject the reminder as a virtual bootstrap file
@@ -55,8 +55,8 @@ const handler: HookHandler = async (event) => {
       path: 'SELF_IMPROVEMENT_REMINDER.md',
       content: REMINDER_CONTENT,
       virtual: true,
-    });
+    })
   }
-};
+}
 
-export default handler;
+export default handler
