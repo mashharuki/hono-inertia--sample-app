@@ -10,10 +10,13 @@
   "dependencies": {
     "@inertiajs/react": "^2.0.0",
     "@repo/shared": "workspace:*",
+    "dompurify": "^3.4.2",
+    "marked": "^15.0.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
+    "@types/dompurify": "^3.0.5",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.3.4",

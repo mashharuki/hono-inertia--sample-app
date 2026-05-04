@@ -27,9 +27,9 @@
   - [x] NFR Requirements（完了 - 2026-05-04）
   - [x] NFR Design（完了 - 2026-05-04）
   - [x] Code Generation（完了 - 2026-05-04 / 12ファイル）
-- [ ] Unit-03: ブログ機能
-  - [ ] Functional Design
-  - [ ] Code Generation
+- [x] Unit-03: ブログ機能
+  - [x] Functional Design（完了 - 2026-05-04）
+  - [x] Code Generation（完了 - 2026-05-04 / 14操作・新規12+更新2）
 - [ ] Build and Test
 
 ## Operations Phase
@@ -40,6 +40,6 @@
 - Performance: 未設定
 
 ## 現在のステージ
-**Construction Phase** - Unit-02 完了・Unit-03（ブログ機能）へ進む準備完了
+**Construction Phase** - Unit-03 全完了・Build and Test 待ち
 
 ---

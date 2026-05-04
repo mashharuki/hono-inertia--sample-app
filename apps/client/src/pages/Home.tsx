@@ -1,62 +1,116 @@
-import { Head, Link } from '@inertiajs/react'
+/**
+ * Home ページ（記事一覧）
+ * Unit-03: ブログ機能
+ * ウェルカムページから記事一覧ページに全面改修
+ */
+
+import { Head, Link, usePage } from '@inertiajs/react'
+import type { Pagination, Post, SharedProps } from '@repo/shared'
+import PostCard from '../components/PostCard'
 import RootLayout from '../layouts/RootLayout'
 
 type HomeProps = {
-  message: string
+  posts: Post[]
+  pagination: Pagination
 }
 
-export default function Home({ message }: HomeProps) {
+export default function Home({ posts, pagination }: HomeProps) {
+  const { auth } = usePage<SharedProps>().props
+  const { currentPage, totalPages, totalCount } = pagination
+
   return (
     <RootLayout>
-      <Head title="ホーム" />
+      <Head title="ホーム - Hono Blog" />
 
-      {/* ヒーローセクション */}
-      <section className="bg-gradient-to-b from-primary-50 to-white py-20">
-        <div className="container-content text-center">
-          <h1 className="mb-4 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
-            Hono × Inertia.js × React
-          </h1>
-          <p className="mb-8 text-lg text-slate-600 max-w-2xl mx-auto">{message}</p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/posts" className="btn-primary no-underline px-6 py-3 text-base">
-              記事を読む
-            </Link>
-            <Link href="/register" className="btn-secondary no-underline px-6 py-3 text-base">
-              アカウント作成
-            </Link>
+      {/* ページヘッダー */}
+      <section className="border-b border-slate-200 bg-white py-8">
+        <div className="container-content">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-2xl font-bold text-slate-900">記事一覧</h1>
+              <p className="mt-1 text-sm text-slate-500">
+                {totalCount > 0 ? `${totalCount} 件の記事` : '記事なし'}
+              </p>
+            </div>
+            {auth.user && (
+              <Link
+                href="/posts/new"
+                className="btn-primary no-underline"
+              >
+                新しい記事を書く
+              </Link>
+            )}
           </div>
         </div>
       </section>
 
-      {/* 技術スタック紹介 */}
-      <section className="py-16">
+      {/* 記事一覧 */}
+      <section className="py-8">
         <div className="container-content">
-          <h2 className="mb-10 text-center text-2xl font-bold text-slate-900">技術スタック</h2>
-          <div className="grid gap-6 sm:grid-cols-3">
-            {[
-              {
-                title: 'Hono',
-                desc: 'エッジ対応の軽量 Web フレームワーク。Cloudflare Workers で動作します。',
-                icon: '🔥',
-              },
-              {
-                title: 'Inertia.js',
-                desc: 'API なしでサーバーとクライアントをつなぐ SPA アーキテクチャ。',
-                icon: '⚡',
-              },
-              {
-                title: 'React + Tailwind',
-                desc: 'モダンな UI を型安全に構築。Shadcn/ui コンポーネントを活用します。',
-                icon: '⚛️',
-              },
-            ].map((item) => (
-              <div key={item.title} className="card p-6">
-                <div className="mb-3 text-3xl">{item.icon}</div>
-                <h3 className="mb-2 text-lg font-semibold text-slate-900">{item.title}</h3>
-                <p className="text-sm text-slate-600">{item.desc}</p>
+          {posts.length === 0 ? (
+            /* 記事 0 件 */
+            <div className="rounded-lg border border-slate-200 bg-slate-50 p-12 text-center">
+              <p className="text-lg font-medium text-slate-700">まだ記事がありません</p>
+              <p className="mt-2 text-sm text-slate-500">
+                最初の記事を投稿してブログを始めましょう
+              </p>
+              {auth.user && (
+                <Link href="/posts/new" className="btn-primary mt-4 inline-block no-underline">
+                  記事を書く
+                </Link>
+              )}
+            </div>
+          ) : (
+            /* 記事カードリスト */
+            <div className="grid gap-6 sm:grid-cols-1 lg:grid-cols-2">
+              {posts.map((post) => (
+                <PostCard key={post.id} post={post} />
+              ))}
+            </div>
+          )}
+
+          {/* ページネーション */}
+          {totalPages > 1 && (
+            <nav
+              className="mt-8 flex items-center justify-center gap-2"
+              aria-label="ページネーション"
+            >
+              {currentPage > 1 && (
+                <Link
+                  href={`/?page=${currentPage - 1}`}
+                  className="rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 no-underline transition-colors"
+                >
+                  前へ
+                </Link>
+              )}
+
+              <div className="flex items-center gap-1">
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                  <Link
+                    key={page}
+                    href={`/?page=${page}`}
+                    className={`rounded-md px-3 py-2 text-sm font-medium no-underline transition-colors ${
+                      page === currentPage
+                        ? 'bg-primary-600 text-white'
+                        : 'border border-slate-300 bg-white text-slate-700 hover:bg-slate-50'
+                    }`}
+                    aria-current={page === currentPage ? 'page' : undefined}
+                  >
+                    {page}
+                  </Link>
+                ))}
               </div>
-            ))}
-          </div>
+
+              {currentPage < totalPages && (
+                <Link
+                  href={`/?page=${currentPage + 1}`}
+                  className="rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 no-underline transition-colors"
+                >
+                  次へ
+                </Link>
+              )}
+            </nav>
+          )}
         </div>
       </section>
     </RootLayout>

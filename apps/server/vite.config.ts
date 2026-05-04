@@ -1,4 +1,4 @@
-import { devServer } from '@hono/vite-dev-server'
+import devServer from '@hono/vite-dev-server'
 import adapter from '@hono/vite-dev-server/cloudflare'
 import { defineConfig } from 'vite'
 

@@ -44,7 +44,8 @@ authRouter.post('/register', async (c) => {
         errors[field] = issue.message
       }
     }
-    return c.render('Register', { errors }, { status: 422 })
+    c.status(422)
+    return c.render('Register', { errors })
   }
 
   const { email, password, displayName } = parseResult.data
@@ -52,11 +53,8 @@ authRouter.post('/register', async (c) => {
   // メール重複確認
   const existing = await usersStore.findByEmail(email)
   if (existing) {
-    return c.render(
-      'Register',
-      { errors: { email: 'このメールアドレスは既に使用されています' } },
-      { status: 422 }
-    )
+    c.status(422)
+    return c.render('Register', { errors: { email: 'このメールアドレスは既に使用されています' } })
   }
 
   // パスワードハッシュ化・ユーザー作成
@@ -99,7 +97,8 @@ authRouter.post('/login', async (c) => {
         errors[field] = issue.message
       }
     }
-    return c.render('Login', { errors }, { status: 422 })
+    c.status(422)
+    return c.render('Login', { errors })
   }
 
   const { email, password } = parseResult.data
@@ -112,15 +111,12 @@ authRouter.post('/login', async (c) => {
 
   if (!user || !isValid) {
     logger.warn('ログイン失敗', { email })
-    return c.render(
-      'Login',
-      {
-        errors: {
-          message: 'メールアドレスまたはパスワードが正しくありません',
-        },
+    c.status(422)
+    return c.render('Login', {
+      errors: {
+        message: 'メールアドレスまたはパスワードが正しくありません',
       },
-      { status: 422 }
-    )
+    })
   }
 
   // セッション作成

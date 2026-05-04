@@ -285,3 +285,58 @@
 
 ---
 
+## Construction Unit-03 - Functional Design 開始（ユーザー [B] 選択）
+**Timestamp**: 2026-05-04T21:00:00Z
+**User Input**: "AI-DLC Construction Phase の続きです。ユーザーが [B] を選択しました。Unit-02（認証機能）が完了し、次はUnit-03（ブログ機能）のFunctional Designを実行してください。"
+**AI Response**: Unit-02 の完了承認を受理。Unit-03（ブログ機能）Functional Design を開始する。Post・Comment のデータモデル・ビジネスロジック・APIエンドポイント・フロントエンドページ仕様の設計書を作成中。
+**Context**: Unit-03 Functional Design 開始。packages/shared の既存型定義（Post / Comment / Pagination）を活用し、Cloudflare Workers ステートレス設計を前提とする。
+
+---
+
+## Construction Unit-03 - Functional Design 完了
+**Timestamp**: 2026-05-04T21:30:00Z
+**User Input**: （自動実行）
+**AI Response**: Unit-03 Functional Design 設計書を生成完了。aidlc-docs/construction/unit-03/functional-design/functional-design.md を作成。ユーザー承認待ち。
+  - 設計内容: Post データモデル（モックデータ5件）・Comment データモデル（モックデータ5件）・postsStore/commentsStore の CRUD メソッド仕様・7エンドポイント（GET / / GET /posts/:id / GET /posts/new / POST /posts / GET /posts/:id/edit / PUT /posts/:id / POST /posts/:id/comments）・4ページ（Home / PostShow / PostNew / PostEdit）・4共有 UI コンポーネント（PostCard / CommentList / CommentForm / MarkdownRenderer）・Inertia SharedProps 活用方針・エラーハンドリング方針・ストア初期化依存関係
+**Context**: Unit-03 Functional Design 完了。aidlc-state.md の [x] Functional Design を更新済み。次ステージ: NFR Requirements・NFR Design・Infrastructure Design はすべてスキップ → Code Generation へ進む。
+
+---
+
+## Construction Unit-03 - Functional Design ユーザー承認（[B] 選択）
+**Timestamp**: 2026-05-04T22:00:00Z
+**User Input**: "AI-DLC Construction Phase の続きです。ユーザーが [B] を選択しました。Unit-03（ブログ機能）のFunctional Designが承認され、Code Generation（Part 1 - 計画）を実行してください。"
+**AI Response**: Unit-03 Functional Design の承認を受理。Code Generation Part 1（計画フェーズ）を開始する。
+**Context**: Unit-03 Functional Design 承認完了。[B]（次のステージへ進む）を選択。次: Unit-03 Code Generation Part 1。
+
+---
+
+## Construction Unit-03 - Code Generation Part 1（計画）承認
+**Timestamp**: 2026-05-04T22:30:00Z
+**User Input**: "[B] を選択 - Unit-03（ブログ機能）のコード生成計画が承認され、Part 2（実際のコード生成）を実行してください。"
+**AI Response**: ユーザーが [B] を選択。Unit-03 Code Generation Part 2（コード生成）を開始。
+**Context**: Unit-03 Code Generation Part 1 承認。6ステップ・14操作の実装計画が確認済み。
+
+---
+
+## Construction Unit-03 - Code Generation Part 2（コード生成）完了
+**Timestamp**: 2026-05-04T22:50:00Z
+**User Input**: （自動実行 - Part 2）
+**AI Response**: Unit-03 全 14 操作のコード生成完了。
+  - Step 1: apps/server/src/stores/postsStore.ts（新規・5件モック・findAll/findById/create/update/delete）
+  - Step 1: apps/server/src/stores/commentsStore.ts（新規・5件モック・findByPostId/create）
+  - Step 2: apps/server/src/routes/posts.ts（新規・GET //posts/new/posts/:id/posts/:id/edit・POST /posts/:id/_method=PUT/DELETE）
+  - Step 2: apps/server/src/routes/comments.ts（新規・POST /posts/:id/comments）
+  - Step 3: apps/server/src/index.ts（更新・postsRouter/commentsRouter 追加・既存 GET / 削除）
+  - Step 4: apps/client/src/components/PostCard.tsx（新規・stripMarkdown/formatDate・タグバッジ）
+  - Step 4: apps/client/src/components/CommentList.tsx（新規・0件メッセージ・イニシャルアバター）
+  - Step 4: apps/client/src/components/CommentForm.tsx（新規・useForm・onSuccess reset）
+  - Step 4: apps/client/src/components/MarkdownRenderer.tsx（新規・marked+DOMPurify XSS対策・prose CSS）
+  - Step 5: apps/client/src/pages/Home.tsx（更新・PostCard・ページネーション・記事0件メッセージ）
+  - Step 5: apps/client/src/pages/PostShow.tsx（新規・DeleteButton form.post/_method=DELETE・所有者チェック）
+  - Step 5: apps/client/src/pages/PostNew.tsx（新規・useForm・tags カンマ区切り）
+  - Step 5: apps/client/src/pages/PostEdit.tsx（新規・form.put()・tags.join(', ') 初期値）
+  - Step 6: apps/client/package.json（更新・marked/dompurify/@types/dompurify 追加）
+**Context**: Unit-03 Code Generation Part 2 完了。aidlc-state.md 更新（Unit-03 全 [x]）。Build and Test 待ち。
+
+---
+
