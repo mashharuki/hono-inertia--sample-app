@@ -9,6 +9,6 @@ command = ""
 [vars]
 ENVIRONMENT = "production"
 
-[[assets]]
+[assets]
 directory = "public"
 binding = "ASSETS"
