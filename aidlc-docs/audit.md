@@ -340,3 +340,23 @@
 
 ---
 
+## Build and Test - セッション再開確認
+**Timestamp**: 2026-05-05T00:00:00Z
+**User Input**: "前回のAI-DLC Build and Testステージが途中で中断されました。aidlc-state.mdを確認して現在の状態を把握し、Build and Testステージを再開してください。"
+**AI Response**: セッション再開。aidlc-state.md および build-and-test ディレクトリを確認。全 5 ファイル（build-instructions.md / unit-test-instructions.md / integration-test-instructions.md / performance-test-instructions.md / build-and-test-summary.md）が既に完成していることを確認。aidlc-state.md も「Build and Test 完了」とマーク済み。audit.md への Build and Test 完了ログが欠落していたため追記。
+**Context**: Build and Test ステージ - セッション中断からの復帰確認。全成果物が揃っていることを確認済み。
+
+---
+
+## Build and Test - 完了確認
+**Timestamp**: 2026-05-05T00:01:00Z
+**User Input**: （セッション再開による自動確認）
+**AI Response**: Build and Test ステージの全成果物を確認・完了宣言。
+  - build-instructions.md: ビルド手順（環境設定・依存関係インストール・開発サーバー起動・プロダクションビルド・デプロイ手順）
+  - unit-test-instructions.md: ユニットテスト手順（学習用のため自動テストなし・手動確認手順を記載）
+  - integration-test-instructions.md: 統合テスト手順（7シナリオ：ユーザー登録・ログイン・記事CRUD・コメント・Inertia SPA ナビゲーション・セキュリティ・レスポンシブデザイン）
+  - performance-test-instructions.md: パフォーマンステスト手順（手動確認4項目：バンドルサイズ・Lighthouse・Network タブ・PBKDF2 処理時間）
+  - build-and-test-summary.md: 総合サマリー（クイックスタート・環境変数・主要コマンド・ビルドフロー・デプロイフロー・ADR・制限事項・次のステップ）
+**Context**: Build and Test ステージ完了。Construction Phase 全ステージ完了。Operations Phase（プレースホルダー）へ進む準備完了。
+
+---

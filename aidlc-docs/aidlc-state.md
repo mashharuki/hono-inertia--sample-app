@@ -30,7 +30,7 @@
 - [x] Unit-03: ブログ機能
   - [x] Functional Design（完了 - 2026-05-04）
   - [x] Code Generation（完了 - 2026-05-04 / 14操作・新規12+更新2）
-- [ ] Build and Test
+- [x] Build and Test（完了 - 2026-05-05）
 
 ## Operations Phase
 - [ ] Operations（プレースホルダー）
@@ -40,6 +40,6 @@
 - Performance: 未設定
 
 ## 現在のステージ
-**Construction Phase** - Unit-03 全完了・Build and Test 待ち
+**Construction Phase 完了** - 全 Unit および Build and Test が完了。Operations Phase（プレースホルダー）へ進む準備完了。
 
 ---
