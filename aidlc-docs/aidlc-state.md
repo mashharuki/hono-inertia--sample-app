@@ -33,13 +33,16 @@
 - [x] Build and Test（完了 - 2026-05-05）
 
 ## Operations Phase
-- [ ] Operations（プレースホルダー）
+- [x] Operations（完了 - 2026-05-05）
+  - [x] deployment.md（Cloudflare Workers デプロイ手順）
+  - [x] monitoring.md（モニタリング・ログ・障害対応）
+  - [x] operations-summary.md（Operations Phase サマリー）
 
 ## Extension Configuration
 - Security Baseline: 未設定
 - Performance: 未設定
 
 ## 現在のステージ
-**Construction Phase 完了** - 全 Unit および Build and Test が完了。Operations Phase（プレースホルダー）へ進む準備完了。
+**全フェーズ完了** - Inception / Construction / Operations の全フェーズが完了。
 
 ---

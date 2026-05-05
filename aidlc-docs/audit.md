@@ -360,3 +360,27 @@
 **Context**: Build and Test ステージ完了。Construction Phase 全ステージ完了。Operations Phase（プレースホルダー）へ進む準備完了。
 
 ---
+
+## Operations Phase - 実行開始
+**Timestamp**: 2026-05-05T10:00:00Z
+**User Input**: "AI-DLCのOperations Phaseを実行してください。作業ディレクトリ: /Users/harukikondo/git/hono-inertia--sample-app。現在の状態: Construction Phase（Unit-01, Unit-02, Unit-03, Build and Test）はすべて完了済み。aidlc-docs/aidlc-state.md の Operations Phase セクションに `- [ ] Operations（プレースホルダー）` が残っている。このプロジェクトは Hono + Inertia.js + React + Cloudflare Workers のブログアプリ。"
+**AI Response**: Operations Phase を開始。aidlc-state.md・wrangler.toml・package.json を確認し、プロジェクト固有のデプロイ・運用ドキュメントを作成。
+**Context**: Operations Phase 開始。aidlc-docs/operations/ ディレクトリを新規作成し、3ドキュメントを生成。
+
+---
+
+## Operations Phase - 完了
+**Timestamp**: 2026-05-05T10:05:00Z
+**User Input**: （Operations Phase 自動実行）
+**AI Response**: Operations Phase の全成果物を作成・完了宣言。
+  - aidlc-docs/operations/deployment.md: Cloudflare Workers デプロイ手順
+    （wrangler login / pnpm build / pnpm deploy / ロールバック / CI/CD 参考設定）
+  - aidlc-docs/operations/monitoring.md: モニタリング・ログ・障害対応手順
+    （wrangler tail / Cloudflare ダッシュボード / インシデントレベル定義 / 障害調査フロー / 定期メンテナンス）
+  - aidlc-docs/operations/operations-summary.md: Operations Phase サマリー
+    （クイックリファレンス / 運用チェックリスト / 制限事項 / 今後の拡張ポイント / 全フェーズ完了状況）
+  - aidlc-state.md を更新: Operations Phase を [x] 完了とマーク
+  - aidlc-state.md 現在ステージ: 「全フェーズ完了」に更新
+**Context**: Operations Phase 完了。AI-DLC Inception / Construction / Operations の全フェーズが完了。
+
+---
