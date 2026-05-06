@@ -23,8 +23,7 @@ app.use('*', authMiddleware)
 // ワーカーを経由するため、静的ファイルとして直接配信されなくなった index.html を
 // ここで組み立てる。
 const rootView: RootView = async (page, c) => {
-  const injectSlot =
-    `<script type="application/json" data-page="app">${serializePage(page)}</script>\n    <div id="app"></div>`
+  const injectSlot = `<script type="application/json" data-page="app">${serializePage(page)}</script>\n    <div id="app"></div>`
 
   try {
     const origin = new URL(c.req.url).origin
@@ -58,7 +57,9 @@ const rootView: RootView = async (page, c) => {
 app.use('*', async (c, next) => {
   const origSetRenderer = c.setRenderer
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  ;(c as any).setRenderer = (renderer: (component: string, props?: Record<string, unknown>) => Response) => {
+  ;(c as any).setRenderer = (
+    renderer: (component: string, props?: Record<string, unknown>) => Response
+  ) => {
     const wrapped = (component: string, props: Record<string, unknown> = {}) =>
       renderer(component, {
         auth: { user: c.var.currentUser },

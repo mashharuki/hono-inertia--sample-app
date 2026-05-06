@@ -55,7 +55,10 @@ authRouter.post('/register', async (c) => {
   const existing = await usersStore.findByEmail(email)
   if (existing) {
     c.status(422)
-    return c.render('Register', { auth: { user: c.var.currentUser }, errors: { email: 'このメールアドレスは既に使用されています' } })
+    return c.render('Register', {
+      auth: { user: c.var.currentUser },
+      errors: { email: 'このメールアドレスは既に使用されています' },
+    })
   }
 
   // パスワードハッシュ化・ユーザー作成
