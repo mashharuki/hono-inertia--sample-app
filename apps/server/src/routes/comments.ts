@@ -6,6 +6,7 @@
 import { createCommentSchema } from '@repo/shared'
 import { Hono } from 'hono'
 import { logger } from '../lib/logger.js'
+import { parseBody } from '../lib/parseBody.js'
 import { requireAuth } from '../middleware/auth.js'
 import { commentsStore } from '../stores/commentsStore.js'
 import { postsStore } from '../stores/postsStore.js'
@@ -23,10 +24,10 @@ commentsRouter.post('/posts/:id/comments', requireAuth, async (c) => {
   const post = postsStore.findById(postId)
   if (!post) {
     c.status(404)
-    return c.render('Error', { message: '記事が見つかりません' })
+    return c.render('Error', { auth: { user: c.var.currentUser }, message: '記事が見つかりません' })
   }
 
-  const body = await c.req.parseBody()
+  const body = await parseBody(c)
 
   const parseResult = createCommentSchema.safeParse({
     body: body.body,
@@ -44,7 +45,7 @@ commentsRouter.post('/posts/:id/comments', requireAuth, async (c) => {
     // バリデーションエラー時は記事詳細ページにエラーを渡して再描画
     const comments = commentsStore.findByPostId(postId)
     c.status(422)
-    return c.render('PostShow', { post, comments, errors })
+    return c.render('PostShow', { auth: { user: c.var.currentUser }, post, comments, errors })
   }
 
   const comment = commentsStore.create({ body: parseResult.data.body, postId }, currentUser)

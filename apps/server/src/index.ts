@@ -50,6 +50,27 @@ const rootView: RootView = async (page, c) => {
 </html>`
 }
 
+// 共有 Props インターセプター: inertia ミドルウェアより前に登録することで、
+// inertia が c.setRenderer() を呼ぶ瞬間をフックし、渡されるレンダラーを
+// auth/flash 注入済みのラッパーで置き換える。
+// c.render をラップすると c.#renderer を通じた無限再帰になるため、
+// setRenderer を差し替える方式を採用している。
+app.use('*', async (c, next) => {
+  const origSetRenderer = c.setRenderer
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ;(c as any).setRenderer = (renderer: (component: string, props?: Record<string, unknown>) => Response) => {
+    const wrapped = (component: string, props: Record<string, unknown> = {}) =>
+      renderer(component, {
+        auth: { user: c.var.currentUser },
+        flash: {},
+        ...props,
+      })
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    origSetRenderer(wrapped as any)
+  }
+  await next()
+})
+
 app.use('*', inertia({ rootView }))
 
 // 認証ルート: /register, /login, /logout
@@ -64,7 +85,7 @@ app.route('/', commentsRouter)
 
 // ルート: ダッシュボード
 app.get('/dashboard', (c) => {
-  return c.render('Dashboard', {})
+  return c.render('Dashboard', { auth: { user: c.var.currentUser } })
 })
 
 // 静的アセットフォールバック: run_worker_first = true により全リクエストが

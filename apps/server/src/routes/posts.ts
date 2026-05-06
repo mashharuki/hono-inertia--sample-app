@@ -14,6 +14,7 @@
 import { createPostSchema, updatePostSchema } from '@repo/shared'
 import { Hono } from 'hono'
 import { logger } from '../lib/logger.js'
+import { parseBody } from '../lib/parseBody.js'
 import { requireAuth } from '../middleware/auth.js'
 import { commentsStore } from '../stores/commentsStore.js'
 import { postsStore } from '../stores/postsStore.js'
@@ -35,6 +36,7 @@ postsRouter.get('/', (c) => {
   const posts = allPosts.slice(start, start + perPage)
 
   return c.render('Home', {
+    auth: { user: c.var.currentUser },
     posts,
     pagination: {
       currentPage,
@@ -47,7 +49,7 @@ postsRouter.get('/', (c) => {
 
 /** GET /posts/new - 記事投稿フォーム（認証必須） */
 postsRouter.get('/posts/new', requireAuth, (c) => {
-  return c.render('PostNew', {})
+  return c.render('PostNew', { auth: { user: c.var.currentUser } })
 })
 
 /** POST /posts - 記事作成（認証必須） */
@@ -55,7 +57,7 @@ postsRouter.post('/posts', requireAuth, async (c) => {
   const currentUser = c.var.currentUser
   if (!currentUser) return c.redirect('/login', 302)
 
-  const body = await c.req.parseBody()
+  const body = await parseBody(c)
 
   // tags: カンマ区切り文字列を配列に変換
   const rawTags = typeof body.tags === 'string' ? body.tags : ''
@@ -79,7 +81,7 @@ postsRouter.post('/posts', requireAuth, async (c) => {
       }
     }
     c.status(422)
-    return c.render('PostNew', { errors })
+    return c.render('PostNew', { auth: { user: c.var.currentUser }, errors })
   }
 
   const post = postsStore.create(parseResult.data, currentUser)
@@ -93,12 +95,12 @@ postsRouter.get('/posts/:id', (c) => {
   const post = postsStore.findById(c.req.param('id'))
   if (!post) {
     c.status(404)
-    return c.render('Error', { message: '記事が見つかりません' })
+    return c.render('Error', { auth: { user: c.var.currentUser }, message: '記事が見つかりません' })
   }
 
   const comments = commentsStore.findByPostId(post.id)
 
-  return c.render('PostShow', { post, comments })
+  return c.render('PostShow', { auth: { user: c.var.currentUser }, post, comments })
 })
 
 /** GET /posts/:id/edit - 記事編集フォーム（認証必須・所有者のみ） */
@@ -109,15 +111,15 @@ postsRouter.get('/posts/:id/edit', requireAuth, (c) => {
 
   if (!post) {
     c.status(404)
-    return c.render('Error', { message: '記事が見つかりません' })
+    return c.render('Error', { auth: { user: c.var.currentUser }, message: '記事が見つかりません' })
   }
 
   if (post.authorId !== currentUser.id) {
     c.status(403)
-    return c.render('Error', { message: '編集権限がありません' })
+    return c.render('Error', { auth: { user: c.var.currentUser }, message: '編集権限がありません' })
   }
 
-  return c.render('PostEdit', { post })
+  return c.render('PostEdit', { auth: { user: c.var.currentUser }, post })
 })
 
 /** POST /posts/:id - 記事更新（Inertia _method=PUT をシミュレート） */
@@ -128,15 +130,15 @@ postsRouter.post('/posts/:id', requireAuth, async (c) => {
 
   if (!post) {
     c.status(404)
-    return c.render('Error', { message: '記事が見つかりません' })
+    return c.render('Error', { auth: { user: c.var.currentUser }, message: '記事が見つかりません' })
   }
 
   if (post.authorId !== currentUser.id) {
     c.status(403)
-    return c.render('Error', { message: '編集権限がありません' })
+    return c.render('Error', { auth: { user: c.var.currentUser }, message: '編集権限がありません' })
   }
 
-  const body = await c.req.parseBody()
+  const body = await parseBody(c)
 
   // Inertia.js の form.put() は _method=PUT を付与するが、
   // 削除リクエスト（_method=DELETE）もここで処理する
@@ -170,13 +172,13 @@ postsRouter.post('/posts/:id', requireAuth, async (c) => {
       }
     }
     c.status(422)
-    return c.render('PostEdit', { post, errors })
+    return c.render('PostEdit', { auth: { user: c.var.currentUser }, post, errors })
   }
 
   const updated = postsStore.update(post.id, parseResult.data)
   if (!updated) {
     c.status(500)
-    return c.render('Error', { message: '更新に失敗しました' })
+    return c.render('Error', { auth: { user: c.var.currentUser }, message: '更新に失敗しました' })
   }
 
   logger.info('記事更新完了', { postId: post.id, userId: currentUser.id })

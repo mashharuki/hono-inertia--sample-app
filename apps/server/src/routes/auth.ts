@@ -11,6 +11,7 @@ import { loginSchema, registerSchema } from '@repo/shared'
 import { Hono } from 'hono'
 import { hashPassword, verifyPassword } from '../lib/crypto.js'
 import { logger } from '../lib/logger.js'
+import { parseBody } from '../lib/parseBody.js'
 import { buildClearSessionCookie, buildSessionCookie, createSession } from '../lib/session.js'
 import { validateEnv } from '../middleware/validateEnv.js'
 import { usersStore } from '../stores/usersStore.js'
@@ -20,14 +21,14 @@ const authRouter = new Hono<Env>()
 
 /** GET /register - 登録ページ表示 */
 authRouter.get('/register', (c) => {
-  return c.render('Register', { errors: {} })
+  return c.render('Register', { auth: { user: c.var.currentUser }, errors: {} })
 })
 
 /** POST /register - ユーザー登録処理 */
 authRouter.post('/register', async (c) => {
   validateEnv(c.env)
 
-  const body = await c.req.parseBody()
+  const body = await parseBody(c)
 
   // バリデーション
   const parseResult = registerSchema.safeParse({
@@ -45,7 +46,7 @@ authRouter.post('/register', async (c) => {
       }
     }
     c.status(422)
-    return c.render('Register', { errors })
+    return c.render('Register', { auth: { user: c.var.currentUser }, errors })
   }
 
   const { email, password, displayName } = parseResult.data
@@ -54,7 +55,7 @@ authRouter.post('/register', async (c) => {
   const existing = await usersStore.findByEmail(email)
   if (existing) {
     c.status(422)
-    return c.render('Register', { errors: { email: 'このメールアドレスは既に使用されています' } })
+    return c.render('Register', { auth: { user: c.var.currentUser }, errors: { email: 'このメールアドレスは既に使用されています' } })
   }
 
   // パスワードハッシュ化・ユーザー作成
@@ -74,14 +75,14 @@ authRouter.post('/register', async (c) => {
 
 /** GET /login - ログインページ表示 */
 authRouter.get('/login', (c) => {
-  return c.render('Login', { errors: {} })
+  return c.render('Login', { auth: { user: c.var.currentUser }, errors: {} })
 })
 
 /** POST /login - ログイン認証処理 */
 authRouter.post('/login', async (c) => {
   validateEnv(c.env)
 
-  const body = await c.req.parseBody()
+  const body = await parseBody(c)
 
   // バリデーション
   const parseResult = loginSchema.safeParse({
@@ -113,6 +114,7 @@ authRouter.post('/login', async (c) => {
     logger.warn('ログイン失敗', { email })
     c.status(422)
     return c.render('Login', {
+      auth: { user: c.var.currentUser },
       errors: {
         message: 'メールアドレスまたはパスワードが正しくありません',
       },
